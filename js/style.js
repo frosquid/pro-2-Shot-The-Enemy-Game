@@ -10,10 +10,13 @@ function responsive(e){
     if(mediaScreen.matches){
         // variabel untuk mengambil nilai dari height pada style
         const sizeY = screen.getPropertyValue('height');
+        // variabel untuk mengambil nilai dari height pada style
+        const sizeX = screen.getPropertyValue('width');
+        let size = sizeY < sizeX? sizeY : sizeX;
         // mengubah style lebar pada canvas menjadi nilai dari variabel sizeY
-        canvas.style.width = sizeY;
+        canvas.style.width = `${size}` ;
         // mengubah style tinggi pada canvas menjadi nilai dari variabel sizeY
-        canvas.style.height = sizeY;
+        canvas.style.height = `${size}`;
     }
     // jika tidak sama sekali
     else{
