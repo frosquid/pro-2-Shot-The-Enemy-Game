@@ -31,7 +31,7 @@ window.addEventListener('load', responsive);
 window.addEventListener('resize', responsive);
 function fullscreen(){
     let c = document.documentElement;
-a.requestFullscreen()
+c.requestFullscreen()
 }
 
 
