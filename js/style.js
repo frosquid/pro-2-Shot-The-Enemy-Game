@@ -29,6 +29,6 @@ console.log(mediaScreen);
 window.addEventListener('load', responsive);
 // jika di browser di resize
 window.addEventListener('resize', responsive);
-const css = document.styleSheets[0];css.insertRule('body {background-color : blue}',css.cssRules.length)
+s
 
     

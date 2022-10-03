@@ -15,7 +15,7 @@ body,html{
 }
 
 .screen .canvas{
-    border: 1px solid red;
+    background-color: #25316D;
     width: 100vmin;
     height: 100vmin;
     box-sizing: border-box;
@@ -48,34 +48,35 @@ body,html{
                         'down down shot';
     gap: 10px;
     height: 50%;
-    position: relative;
     place-content: center;
     place-items: center;
     overflow: hidden;
 }
-.controller div{
-    padding: 10px;
-    position: absolute;
+.controller{
+    background-color: #4C0033;
+}
+.controller div span{
+    border-radius: 30px;
+    height: 90px;
+    width: 90px;
+    display: inline-block;
+    background-color: #AF0171;
+    box-shadow: -5px -5px 0px 1px #790252 inset;
 
 }
 .controller .up{
-    background-color: blue;
     grid-area: up;
 }
 .controller .left{
-    background-color: blue;
     grid-area: left;
 }
 .controller .right{
-    background-color: blue;
     grid-area: right;
 }
 .controller .down{
-    background-color: blue;
     grid-area: down;
 }
 .controller .shot{
-    background-color: blue;
     grid-area: shot;
 }
 @media only screen and (max-width: 700px) {
