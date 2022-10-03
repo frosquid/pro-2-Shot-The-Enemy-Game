@@ -56,21 +56,26 @@ body,html{
 .controller div{
     padding: 10px;
     position: absolute;
-    background-color: blue;
+
 }
 .controller .up{
+    background-color: blue;
     grid-area: up;
 }
 .controller .left{
+    background-color: blue;
     grid-area: left;
 }
 .controller .right{
+    background-color: blue;
     grid-area: right;
 }
 .controller .down{
+    background-color: blue;
     grid-area: down;
 }
 .controller .shot{
+    background-color: blue;
     grid-area: shot;
 }
 @media only screen and (max-width: 700px) {
