@@ -23,24 +23,43 @@ function responsive(e){
         canvas.style.height = '100vmin';
     }
 }
-
-console.log(mediaScreen);
 // jika web di load di awal
 window.addEventListener('load', responsive);
 // jika di browser di resize
 window.addEventListener('resize', responsive);
+// fungsi mengaktifkan fullscren mode
 function fullscreen(){
-    let c = document.documentElement;
-c.requestFullscreen()
+    // variabel untuk mengambil seluruh element dalam document
+    const elemen = document.documentElement;
+    // membuat seluruh elemen menjadi fullscreen
+    elemen.requestFullscreen()
 }
-
-
-    
-function buttonHover(...arg){
-    arg.forEach((a,i) => {
-        const cot = document.querySelector(`${a} span`);
-    cot.addEventListener('touchstart', a => {cot.style.boxShadow = '-1px -1px 6px 1px #d780b84b , 1px 1px 0px 1px #D780B8 inset,-1px -1px 0px 1px #790252 inset,1px 1px 0px 1px #26001a'})
-    cot.addEventListener('touchend', a => {cot.style.boxShadow = '-2px -2px 6px 1px #d780b84b , 2px 2px 0px 1px #D780B8 inset,-5px -5px 0px 1px #790252 inset,5px 5px 0px 1px #26001a'})
+// fungsi deklarasi object untuk tombol hover
+function HoverBUtton(a,b,...arg){
+    this.a = a;
+    this.b = b;
+    this.arg = arg;
+}
+// menambahkan prototype sebuah fungsi ke object hoverbutton
+HoverBUtton.prototype.Run = function(){
+    // mengulang this.arg sesuai panjangnya
+    this.arg.forEach(a => {
+        // variabel untuk mengambil elemen didalam document
+        const elemen = document.querySelector(`${a} span`);
+        // highorder fungsi untuk berjalanketika di tekan
+        elemen.addEventListener('touchstart', a => {elemen.style.boxShadow = this.a })
+        // highorder fungsi untuk berjalanketika di lepas tekannannya
+        elemen.addEventListener('touchend', a => {elemen.style.boxShadow = this.b})
     })
 }
-buttonHover('.up','.left','.right','.down','.shot')
+// membuat instance baru dari object hoverbutton menjadi constrolerHover
+const constrolerHover =  new HoverBUtton(`-1px -1px 6px 1px #d780b84b , 
+1px 1px 0px 1px #D780B8 inset,
+-1px -1px 0px 1px #790252 inset,
+1px 1px 0px 1px #26001a`,`-2px -2px 6px 1px #d780b84b , 
+2px 2px 0px 1px #D780B8 inset,
+-5px -5px 0px 1px #790252 inset,
+5px 5px 0px 1px #26001a`,
+'.up','.left','.right','.down','.shot');
+// menjalankan instance constrolerHover
+constrolerHover.Run()
