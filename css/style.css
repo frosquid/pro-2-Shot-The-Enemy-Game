@@ -16,10 +16,18 @@ body,html{
 
 .screen .canvas{
     border: 1px solid red;
-    /* background-color: #25316D; */
     width: 100vmin;
     height: 100vmin;
     box-sizing: border-box;
+    position: relative;
+}
+.screen .canvas .player{
+    background-color: aliceblue;
+    width: 5%;
+    height: 5%;
+    position: absolute;
+    left: 47.5%;
+    top: 47.5;
 }
 .screen .canvas .home{
     height: 100%;
@@ -31,13 +39,45 @@ body,html{
 .screen .canvas .home ul{
     list-style: none;
 }
-@media only screen and (max-width: 600px) {
+.controller{
+    display: none;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: 'up up shot'
+                        'left right shot'
+                        'down down shot';
+    gap: 10px;
+    height: 50%;
+    position: relative;
+    place-content: center;
+    place-items: center;
+    overflow: hidden;
+}
+.controller div{
+    padding: 40px;
+    position: absolute;
+    background-color: blue;
+}
+.controller .up{
+    grid-area: up;
+}
+.controller .left{
+    grid-area: left;
+}
+.controller .right{
+    grid-area: right;
+}
+.controller .down{
+    grid-area: down;
+}
+.controller .shot{
+    grid-area: shot;
+}
+@media only screen and (max-width: 700px) {
     .screen {
       height: 50%;
     }
-    .screen .canvas{
-
-        width: 50vh;
-        height: 50vh;
+    .controller{
+        display: grid;
     }
   }
