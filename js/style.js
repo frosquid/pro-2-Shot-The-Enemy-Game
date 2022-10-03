@@ -1,7 +1,7 @@
 // variabel untuk melihat ukuran layar
 const mediaScreen = window.matchMedia('(max-width: 700px)');
 // variabel untuk mengambil element .canvas
-const canvas = document.querySelector('.canvas')
+const canvas = document.querySelector('.canvas');
 // variabel untuk mengambill style yang ada di .screen
 const screen =  window.getComputedStyle(document.querySelector('.screen'));
 // fungsi untuk responsive layout
@@ -29,6 +29,10 @@ console.log(mediaScreen);
 window.addEventListener('load', responsive);
 // jika di browser di resize
 window.addEventListener('resize', responsive);
-s
+function fullscreen(){
+    let c = document.documentElement;
+a.requestFullscreen()
+}
+
 
     
