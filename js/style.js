@@ -28,11 +28,11 @@ console.log(mediaScreen);
 // jika web di load di awal
 window.addEventListener('load', responsive);
 // jika di browser di resize
-// window.addEventListener('resize', responsive);
-// function fullscreen(){
-//     let c = document.documentElement;
-// c.requestFullscreen()
-// }
+window.addEventListener('resize', responsive);
+function fullscreen(){
+    let c = document.documentElement;
+c.requestFullscreen()
+}
 
 
     
