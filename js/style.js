@@ -28,11 +28,19 @@ console.log(mediaScreen);
 // jika web di load di awal
 window.addEventListener('load', responsive);
 // jika di browser di resize
-window.addEventListener('resize', responsive);
-function fullscreen(){
-    let c = document.documentElement;
-c.requestFullscreen()
-}
+// window.addEventListener('resize', responsive);
+// function fullscreen(){
+//     let c = document.documentElement;
+// c.requestFullscreen()
+// }
 
 
     
+function buttonHover(...arg){
+    arg.forEach((a,i) => {
+        const cot = document.querySelector(`${a} span`);
+    cot.addEventListener('mousedown', a => {cot.style.boxShadow = '-1px -1px 6px 1px #d780b84b , 1px 1px 0px 1px #D780B8 inset,-1px -1px 0px 1px #790252 inset,1px 1px 0px 1px #26001a'})
+    cot.addEventListener('mouseup', a => {cot.style.boxShadow = '-2px -2px 6px 1px #d780b84b , 2px 2px 0px 1px #D780B8 inset,-5px -5px 0px 1px #790252 inset,5px 5px 0px 1px #26001a'})
+    })
+}
+buttonHover('.up','.left','.right','.down','.shot')
