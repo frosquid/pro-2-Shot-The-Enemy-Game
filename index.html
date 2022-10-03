@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-cocot="anjay">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +10,20 @@
 <body>
     <div class="screen">
         <div class="canvas">
-
+        <div class="home">
+            <p>Shot The Enemy</p>
+            <ul>
+                <li onclick="play()">Play</li>
+                <li onclick="stats()">Stats</li>
+                <li onclick="leaderboards()">Leaderboards</li>
+                <li onclick="setting()">Setting</li>
+            </ul>
+        </div>
+        <div class="npc"></div>
+        <div class="player"></div>
         </div>
     </div>
     <script src="js/game.js"></script>
+    <script src="js/style.js"></script>
 </body>
 </html>

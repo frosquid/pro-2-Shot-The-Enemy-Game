@@ -1,0 +1,41 @@
+
+:root{
+    --ccontol-size : 100vmin;
+}
+body,html{
+    margin: 0;
+    height: 100%;
+}
+.screen{
+    background-color: black;
+    display: flex;
+    place-items: center;
+    place-content: center;
+    position: relative;
+}
+
+.screen .canvas{
+    background-color: #25316D;
+    width: 100vmin;
+    height: 100vmin;
+}
+.screen .canvas .home{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    place-items: center;
+}
+.screen .canvas .home ul{
+    list-style: none;
+}
+@media only screen and (max-width: 600px) {
+    .screen {
+      height: 50%;
+    }
+    .screen .canvas{
+        background-color: #25316D;
+        width: 50vh;
+        height: 50vh;
+    }
+  }
