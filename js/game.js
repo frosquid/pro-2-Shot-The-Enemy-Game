@@ -19,31 +19,35 @@ function Control(trigerStart,trigerEnd,device,id,...arg){
     this.key = {};
     this.y = 0;
     this.x = 0;
+    
+}
+Control.prototype.keyBind = function(){
+    for(let i = 0 ; i < this.arg.length ; i++){
+        let doc = this.device == 'dekstop'? document : document.querySelector(`.${this.arg[i][0]} .${this.arg[i][0]}`);
+        doc.addEventListener(this.trigerStart, key => {this.key[this.device == 'dekstop'?key.key :this.arg[i][0]] = true});
+        doc.addEventListener(this.trigerEnd, key => {this.key[this.device == 'dekstop'?key.key :this.arg[i][0]] = false});
+    }
 }
 Control.prototype.Run = function(){
-    this.arg.forEach((a,i) => {
-    let doc = this.device == 'dekstop'? document : document.querySelector(`.${this.arg[i][0]} .${this.arg[i][0]}`);
-    doc.addEventListener(this.trigerStart, key => {this.key[this.device == 'dekstop'?key.key :this.arg[i][0]] = true});
-    doc.addEventListener(this.trigerEnd, key => {this.key[this.device == 'dekstop'?key.key :this.arg[i][0]] = false});
-        this.arg[i].forEach((b,j) => {
+    for(let i = 0 ; i < this.arg.length ; i++){
+        for(let j = 0 ; j < this.arg[i].length ; j++){
             if(this.key[this.arg[i][j]]){
-                const run = this.arg[i][j+1];
-                console.log(this.arg[i][j+2]);
-                run(this.arg[i][j+2]);
+                (this.arg[i][j+1])(this.arg[i][j+2])
             }
-        })
-    })
+        }
+    }
 }
 
-const player1 = new Player('andi','.player',.5);
+const player1 = new Player('andi','.player',1);
+
 player1.Reset();
+
 function move([command,object,cordinate]){
     let cssStyle = '';
     cordinate == 'y'? cssStyle = 'top':cssStyle = 'left';
     command == 'add'? object[cordinate]+=object.speed :object[cordinate]-=object.speed;
     const elemen = document.querySelector('.player');
     elemen.style[cssStyle] = `${object[cordinate]}%`;
-    console.log(object[cordinate])
 }
 
 const playerMoveDekstop = new Control(
@@ -58,10 +62,19 @@ const playerMoveMobile = new Control(
     ['up',move,['remove',player1,'y']],
     ['right',move,['add',player1,'x']],
     ['left',move,['remove',player1,'x']]);
-
-function draw(){
+    playerMoveDekstop.keyBind();
+    playerMoveMobile.keyBind();
+    let fps = 0;
+    let cek = 0;
+    function draw (){
+    fps++ 
     playerMoveDekstop.Run();
     playerMoveMobile.Run();
+
     window.requestAnimationFrame(draw)
-}
-window.requestAnimationFrame(draw)
+    }
+    setInterval(function(){
+        document.querySelector('.fps').innerHTML = `${fps} FPS`;
+        fps = 0;
+    },1000)
+    window.requestAnimationFrame(draw)
