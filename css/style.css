@@ -34,8 +34,6 @@ body,html{
         width: 5%;
         height: 5%;
         position: absolute;
-        left: 47.5%;
-        top: 47.5;
     }
     .screen .canvas .home{
         height: 100%;

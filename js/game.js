@@ -2,6 +2,7 @@ function Canvas(y,x,unit){
     this.y = y;
     this.x = x;
     this.unit = unit;
+    this.fps = 0;
 }
 Canvas.prototype.height = function(){
    const canvas = document.querySelector('.canvas');
@@ -11,12 +12,13 @@ Canvas.prototype.height = function(){
 const canva = new Canvas(100,100,'%');
 
 
-function RigidBody(nama, id, speed){
+function RigidBody(nama, id, speed,jump){
     this.nama = nama;
     this.id = id;
+    this.jump = jump;
     this.speed = speed;
-    this.y = 45;
-    this.x = 45;
+    this.y = 47.5;
+    this.x = 47.5;
 }
 RigidBody.prototype.Reset = function (){
     const data = [['top','left'],[this.y,this.x]];
@@ -25,7 +27,7 @@ RigidBody.prototype.Reset = function (){
     }
 }
 
-const player1 = new RigidBody('andi','.player',1);
+const player1 = new RigidBody('andi','.player',1,20);
 player1.Reset();
 
 
@@ -47,11 +49,23 @@ Control.prototype.keyBind = function(){
         doc.addEventListener(this.trigerEnd, key => {this.key[this.device == 'dekstop'?key.key :this.arg[i][0]] = false});
     }
 }
+let cot = 2;
 Control.prototype.Run = function(){
+
     for(let i = 0 ; i < this.arg.length ; i++){
         for(let j = 0 ; j < this.arg[i].length ; j++){
+            
             if(this.key[this.arg[i][j]]){
-                (this.arg[i][j+1])(this.arg[i][j+2])
+                (this.arg[i][j+1])(this.arg[i][j+2]);
+                cot--;
+            }
+            
+            else if(this.arg[i][j+3] != undefined){
+                if(this.key[this.arg[i][j]] == false){
+                    const ob = this.arg[i][+3];
+                    ob([player1]);
+                    cot=2;
+                }
             }
         }
     }
@@ -59,27 +73,45 @@ Control.prototype.Run = function(){
 function Collider(){
     this.arg = arg;
 }
+function gravity([object]){
+    if(object.y <= canva.y){
+        move(['add',object,'y'])
+    }
+    
+}
 
-function move([command,object,cordinate]){
+function jump([command,object,cordinate,speed]){
+            if(cot == 2){
+                move([command,object,cordinate,speed])
+            }
+            else if(object.y <= canva.y)(
+                move(['add',object,cordinate,1])
+            )
+        
+}
+function move([command,object,cordinate,speed]){
     let cssStyle = '';
     cordinate == 'y'? cssStyle = 'top':cssStyle = 'left';
-    command == 'add'? object[cordinate]+=object.speed :object[cordinate]-=object.speed;
+    command == 'add'? object[cordinate]+=object.speed :object[cordinate]-=object[speed];
     const elemen = document.querySelector(object.id);
     elemen.style[cssStyle] = `${object[cordinate]}${canva.unit}`;
 }
 
 const playerMoveDekstop = new Control(
     'keydown','keyup','dekstop','.player',
-    ['s',move,['add',player1,'y']],
-    ['w',move,['remove',player1,'y']],
-    ['d',move,['add',player1,'x']],
-    ['a',move,['remove',player1,'x']]);
+    ['s',move,['add',player1,'y','speed']],
+    ['w',move,['remove',player1,'y','speed']],
+    ['d',move,['add',player1,'x','speed']],
+    ['a',move,['remove',player1,'x','speed']],
+    ['p',jump,['remove',player1,'y','jump'],gravity,[player1]]);
+const playerJumpDekstop = new Control('click','keyup','dekstop','.player')
 const playerMoveMobile = new Control(
     'touchstart','touchend','mobile','.player',
-    ['down',move,['add',player1,'y']],
-    ['up',move,['remove',player1,'y']],
-    ['right',move,['add',player1,'x']],
-    ['left',move,['remove',player1,'x']]);
+    ['down',move,['add',player1,'y','speed']],
+    ['up',move,['remove',player1,'y','speed']],
+    ['right',move,['add',player1,'x','speed']],
+    ['left',move,['remove',player1,'x','speed']],
+    ['shot',jump,['remove',player1,'y','jump'],gravity,[player1]]);
     playerMoveDekstop.keyBind();
     playerMoveMobile.keyBind();
     let fps = 0;
@@ -87,7 +119,6 @@ const playerMoveMobile = new Control(
         fps++ 
         playerMoveDekstop.Run();
         playerMoveMobile.Run();
-
         window.requestAnimationFrame(draw)
     }
     setInterval(function(){
