@@ -1,6 +1,9 @@
 
 :root{
+    user-select: none;
     --ccontol-size : 100vmin;
+    --font-font-family: 'Work Sans', sans-serif;
+    
 }
 body,html{
     margin: 0;
@@ -16,7 +19,7 @@ body,html{
 }
     .screen .fps{
         color: yellow;
-        font-family: sans-serif;
+        font-family: var(--font-font-family);
         position: absolute;
     }
     .screen .canvas{
@@ -44,6 +47,18 @@ body,html{
         .screen .canvas .home ul{
             list-style: none;
         }
+.logo{
+    background-color: #6F38C5;
+    color: rgba(255, 255, 255, 0.548);
+    font-family: var(--font-font-family);
+    text-align: center;
+    height: 4%;
+    display: flex;
+    place-content: center;
+    place-items: center;
+    font-size: 12px;
+    letter-spacing: 3px;
+}
 /* controller area */
 .controller{
     
@@ -53,13 +68,13 @@ body,html{
     grid-template-areas: 'up up shot'
                         'left right shot'
                         'down down shot';
-    height: 50%;
+    height: 46%;
     padding: 40% 0;
     place-content: center;
     place-items: center;
     box-sizing: border-box;
     overflow: hidden;
-    background-color: #4C0033;
+    background-color: #87A2FB;
 }
 
     .controller .up{
@@ -83,13 +98,18 @@ body,html{
         grid-area: shot;
     }
         .controller div span{
-            border-radius: 30px;
+            border-radius: 50%;
             height: 90px;
             width: 90px;
-            display: inline-block;
-            background-color: #AF0171;
+            display: flex;
+            place-content: center;
+            place-items: center;
+            font-size: 50px;
+            font-family: var(--font-font-family);
+            color: rgba(0, 0, 0, 0.541);
+            background-color: #ADDDD0;
             transition: .1S;
-            box-shadow: -2px -2px 6px 1px #d780b84b , 2px 2px 0px 1px #D780B8 inset,-5px -5px 0px 1px #790252 inset,5px 5px 0px 1px #26001a;
+            box-shadow: -2px -2px 6px 1px #ffffff42 , 2px 2px 0px 1px #ffffffa9 inset,-5px -5px 0px 1px #00000046 inset,5px 5px 0px 1px #0000006c;
 
         }
 

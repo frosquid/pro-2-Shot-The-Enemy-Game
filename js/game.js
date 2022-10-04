@@ -1,15 +1,34 @@
+function Canvas(y,x,unit){
+    this.y = y;
+    this.x = x;
+    this.unit = unit;
+}
+Canvas.prototype.height = function(){
+   const canvas = document.querySelector('.canvas');
+   return (window.getComputedStyle(canvas).getPropertyValue('height'))
+}
 
-function Player(nama, id, speed){
+const canva = new Canvas(100,100,'%');
+
+
+function RigidBody(nama, id, speed){
     this.nama = nama;
     this.id = id;
     this.speed = speed;
     this.y = 45;
     this.x = 45;
 }
-Player.prototype.Reset = function (){
-    document.querySelector('.player').style.top = `${this.y}%`;
-    document.querySelector('.player').style.left = `${this.x}%`;
+RigidBody.prototype.Reset = function (){
+    const data = [['top','left'],[this.y,this.x]];
+    for(let i = 0; i < data.length; i++){
+        document.querySelector(this.id).style[data[0][i]] = `${data[1][i]}${canva.unit}`;
+    }
 }
+
+const player1 = new RigidBody('andi','.player',1);
+player1.Reset();
+
+
 function Control(trigerStart,trigerEnd,device,id,...arg){
     this.trigerStart = trigerStart;
     this.trigerEnd = trigerEnd;
@@ -37,17 +56,16 @@ Control.prototype.Run = function(){
         }
     }
 }
-
-const player1 = new Player('andi','.player',1);
-
-player1.Reset();
+function Collider(){
+    this.arg = arg;
+}
 
 function move([command,object,cordinate]){
     let cssStyle = '';
     cordinate == 'y'? cssStyle = 'top':cssStyle = 'left';
     command == 'add'? object[cordinate]+=object.speed :object[cordinate]-=object.speed;
-    const elemen = document.querySelector('.player');
-    elemen.style[cssStyle] = `${object[cordinate]}%`;
+    const elemen = document.querySelector(object.id);
+    elemen.style[cssStyle] = `${object[cordinate]}${canva.unit}`;
 }
 
 const playerMoveDekstop = new Control(
@@ -65,13 +83,12 @@ const playerMoveMobile = new Control(
     playerMoveDekstop.keyBind();
     playerMoveMobile.keyBind();
     let fps = 0;
-    let cek = 0;
     function draw (){
-    fps++ 
-    playerMoveDekstop.Run();
-    playerMoveMobile.Run();
+        fps++ 
+        playerMoveDekstop.Run();
+        playerMoveMobile.Run();
 
-    window.requestAnimationFrame(draw)
+        window.requestAnimationFrame(draw)
     }
     setInterval(function(){
         document.querySelector('.fps').innerHTML = `${fps} FPS`;
