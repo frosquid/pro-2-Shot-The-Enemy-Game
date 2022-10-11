@@ -132,7 +132,7 @@ const playerMoveMobile = new Control(
         console.log(e)
     })
     document.querySelector('.bola2').addEventListener('touchmove', e=>{
-        document.querySelector('.bola2').style.left = `${e.changedTouches[0].clientX}px`;
-        document.querySelector('.bola2').style.top = `${e.changedTouches[0].clientY}px`;
+        document.querySelector('.bola2').style.left = `${e.changedTouches[1].clientX}px`;
+        document.querySelector('.bola2').style.top = `${e.changedTouches[1].clientY}px`;
         console.log(e)
     })
