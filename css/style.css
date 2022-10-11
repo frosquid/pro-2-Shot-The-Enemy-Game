@@ -22,6 +22,20 @@ body,html{
         font-family: var(--font-font-family);
         position: absolute;
     }
+    .screen .bola1{
+        position: absolute;
+        padding: 40px;
+        background-color: red;
+        z-index: 99999999999999999;
+        left: 0;
+    }
+    .screen .bola2{
+        position: absolute;
+        padding: 40px;
+        z-index: 99999999999999999;
+        background-color: red;
+        left: 80%;
+    }
     .screen .canvas{
         background-color: #25316D;
         width: 100vmin;

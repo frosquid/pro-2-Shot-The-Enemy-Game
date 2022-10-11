@@ -126,3 +126,13 @@ const playerMoveMobile = new Control(
         fps = 0;
     },1000)
     window.requestAnimationFrame(draw)
+    document.querySelector('.bola1').addEventListener('touchmove', e=>{
+        document.querySelector('.bola1').style.left = `${e.changedTouches[0].clientX}px`;
+        document.querySelector('.bola1').style.top = `${e.changedTouches[0].clientY}px`;
+        console.log(e)
+    })
+    document.querySelector('.bola2').addEventListener('touchmove', e=>{
+        document.querySelector('.bola2').style.left = `${e.changedTouches[0].clientX}px`;
+        document.querySelector('.bola2').style.top = `${e.changedTouches[0].clientY}px`;
+        console.log(e)
+    })
